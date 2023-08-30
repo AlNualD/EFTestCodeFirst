@@ -11,13 +11,15 @@ namespace EFTestCodeFirst.Controllers;
 public class CharacterController: Controller
 {
     private readonly ICharacterService _characterService;
+    private readonly IGuildService _guildService;
     private readonly IMapper _mapper;
 
 
-    public CharacterController(ICharacterService characterService, IMapper mapper)
+    public CharacterController(ICharacterService characterService, IMapper mapper, IGuildService guildService)
     {
         _characterService = characterService;
         _mapper = mapper;
+        _guildService = guildService;
     }
 
     [HttpGet("{characterId}")]
@@ -32,6 +34,14 @@ public class CharacterController: Controller
     public async Task<List<CharacterDto>> GetCharacterByUser(string userId)
     {
         var characters = await _characterService.GetCharacterByUser(userId);
+
+        return _mapper.Map<List<CharacterDto>>(characters);
+    }
+
+    [HttpGet("by-guild/{guildId}")]
+    public async Task<List<CharacterDto>> GetCharacterByGuild(string guildId)
+    {
+        var characters = await _guildService.GetGuildMembers(guildId);
 
         return _mapper.Map<List<CharacterDto>>(characters);
     }

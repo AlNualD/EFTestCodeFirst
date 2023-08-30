@@ -10,6 +10,7 @@ public interface ICharacterRepository
     public Task<Character> GetCharacter(string id);
 
     public Task<List<Character>> GetCharacterByUser(string userId);
+    public Task<List<Character>> GetCharacterByGuild(string guildId);
 
     public Task<string> AddCharacter(string userId, Character character);
 
@@ -40,6 +41,13 @@ class CharacterRepository : ICharacterRepository
     {
         var characters = await _db.Characters.Where(c => c.User!.Id == userId)
             .ToListAsync();
+
+        return _mapper.Map<List<Character>>(characters);
+    }
+
+    public async Task<List<Character>> GetCharacterByGuild(string guildId)
+    {
+        var characters = await _db.Characters.Where(c => c.Guild != null && c.Guild.Id == guildId).ToListAsync();
 
         return _mapper.Map<List<Character>>(characters);
     }

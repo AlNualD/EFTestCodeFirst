@@ -12,5 +12,7 @@ public class MapperProfileDto: Profile
         CreateMap<NewUserDto, User>().ReverseMap();
         CreateMap<CharacterDto, Character>().ReverseMap();
         CreateMap<NewCharacterDto, Character>().ReverseMap();
+        CreateMap<GuildDto, Guild>().ReverseMap();
+        CreateMap<NewGuildDto, Guild>().ReverseMap();
     }
 }

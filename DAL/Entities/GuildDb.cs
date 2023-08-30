@@ -3,23 +3,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EFTestCodeFirst.DAL.Entities;
 
-public class CharacterDb
+public class GuildDb
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public string Id { get; set; }
-
-    public string Name { get; set; }
     
-    public string? Description { get; set; }
-
-    public int MaxHitPoints { get; set; }
-
-    public int CurrentHitPoints { get; set; }
+    public string Description { get; set; }
 
     public int Gold { get; set; }
 
-    public UserDb? User { get; set; }
-    
-    public GuildDb? Guild { get; set; }
+    [ForeignKey(nameof(CharacterDb))]
+    public string? LeaderId { get; set; }
+
+    public HashSet<CharacterDb> Characters { get; set; } = new();
 }

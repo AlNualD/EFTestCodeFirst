@@ -10,5 +10,6 @@ public class MapperProfileDb: Profile
     {
         CreateMap<CharacterDb, Character>().ReverseMap();
         CreateMap<UserDb, User>().ReverseMap();
+        CreateMap<GuildDb, Guild>().ReverseMap();
     }
 }

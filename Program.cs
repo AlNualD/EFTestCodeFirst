@@ -11,8 +11,10 @@ builder.Services.AddDbContext<ApplicationContext>();
 builder.Services.AddAutoMapper(typeof(MapperProfileDb), typeof(MapperProfileDto));
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<ICharacterService, CharacterService>();
+builder.Services.AddTransient<IGuildService, GuildService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICharacterRepository, CharacterRepository>();
+builder.Services.AddScoped<IGuildRepository, GuildRepository>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

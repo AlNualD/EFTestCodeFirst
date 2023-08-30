@@ -7,6 +7,7 @@ public sealed class ApplicationContext: DbContext
 {
     public DbSet<UserDb> Users => Set<UserDb>();
     public DbSet<CharacterDb> Characters => Set<CharacterDb>();
+    public DbSet<GuildDb> Guilds => Set<GuildDb>();
 
     public ApplicationContext()
     {

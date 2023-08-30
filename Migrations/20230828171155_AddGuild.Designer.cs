@@ -2,6 +2,7 @@
 using EFTestCodeFirst.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EFTestCodeFirst.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20230828171155_AddGuild")]
+    partial class AddGuild
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,7 +58,7 @@ namespace EFTestCodeFirst.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Characters", (string)null);
+                    b.ToTable("Characters");
                 });
 
             modelBuilder.Entity("EFTestCodeFirst.DAL.Entities.GuildDb", b =>
@@ -69,16 +72,15 @@ namespace EFTestCodeFirst.Migrations
                         .HasColumnType("text");
 
                     b.Property<int>("Gold")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("integer");
 
                     b.Property<string>("LeaderId")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Guilds", (string)null);
+                    b.ToTable("GuildDb");
                 });
 
             modelBuilder.Entity("EFTestCodeFirst.DAL.Entities.UserDb", b =>
@@ -93,7 +95,7 @@ namespace EFTestCodeFirst.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("EFTestCodeFirst.DAL.Entities.CharacterDb", b =>
